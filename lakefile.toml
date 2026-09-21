@@ -1,0 +1,16 @@
+name = "NemytskiiLebesgue"
+defaultTargets = ["NemytskiiLebesgue"]
+
+[leanOptions]
+autoImplicit = false
+relaxedAutoImplicit = false
+pp.structureInstances = false
+
+[[require]]
+name = "utilities-zcu"
+git = "https://github.com/madvorak/utilities-zcu"
+rev = "v1.0.0"
+
+[[lean_lib]]
+name = "NemytskiiLebesgue"
+globs = ["NemytskiiLebesgue.+"]
