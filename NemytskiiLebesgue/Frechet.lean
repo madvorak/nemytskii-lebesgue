@@ -249,7 +249,7 @@ lemma convergesTo_of_ae_tendsTo_of_ae_norm_le
       filter_upwards [hgb, ae_all_iff.← hFb] with ω hω₁ hω₂
       rw [Real.mul_rpow zero_le_two (by linarith [norm_nonneg (g ω), norm_nonneg (F 0 ω), hω₁, hω₂ 0]),
           abs_of_nonneg (by linarith [norm_nonneg (g ω), norm_nonneg (F 0 ω), hω₁, hω₂ 0] : 0 ≤ b ω)]
-    have dominated_conv : Tendsto (fun n : ℕ => ∫ ω, ‖F n ω - g ω‖ ^ p.toReal ∂μ) atTop (𝓝 (∫ ω, 0 ∂μ)) := by
+    have dominated_conv : Tendsto (fun n : ℕ => ∫ ω : Ω, ‖F n ω - g ω‖ ^ p.toReal ∂μ) atTop (𝓝 (∫ ω : Ω, 0 ∂μ)) := by
       refine' tendsto_integral_of_dominated_convergence ..
       use fun ω : Ω => (2 * b ω) ^ p.toReal
       · exact (hF · |>.sub hg |>.norm.aemeasurable.pow_const p.toReal |>.aestronglyMeasurable)

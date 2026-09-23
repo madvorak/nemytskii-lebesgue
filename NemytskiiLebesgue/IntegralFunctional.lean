@@ -157,7 +157,7 @@ lemma Function.IsCaratheodory.integrable_nemytskii_deriv_apply
 lemma norm_integral_le_eLpNorm_one_toReal
     {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω}
     (g : Ω → ℝ) :
-    ‖∫ ω, g ω ∂μ‖ ≤ (eLpNorm g 1 μ).toReal := by
+    ‖∫ ω : Ω, g ω ∂μ‖ ≤ (eLpNorm g 1 μ).toReal := by
   rw [eLpNorm_eq_lintegral_rpow_enorm_toReal] <;> norm_num
   convert! norm_integral_le_lintegral_norm g using 1
   norm_num [Real.enorm_eq_ofReal_abs]
@@ -191,13 +191,14 @@ theorem Function.IsCaratheodory.integralFunctional_frechet_deriv
       exact f'.outR1nested_growth hf'bCp
     intro ε hε
     obtain ⟨δ, hδ, hbound⟩ := nemytskii_bound ε hε
-    exact ⟨δ, hδ, fun l hl hl' => by
-      have key := hbound l hl hl'
-      apply le_trans (norm_integral_le_eLpNorm_one_toReal _)
-      convert! ENNReal.toReal_mono _ key using 1
-      · norm_num [eLpNorm_eq_lintegral_rpow_enorm_toReal]
-        congr! 2
-        ext
-        simp [Function.outR1, Function.outR1nested, realLIE, ENorm.enorm, ←NNReal.coe_inj, EuclideanSpace.norm_eq, Real.sqrt_sq_eq_abs]
-      · rw [ENNReal.toReal_mul, ENNReal.toReal_ofReal hε.le]
-      · exact ENNReal.mul_ne_top ENNReal.coe_ne_top (hl.eLpNorm_ne_top)⟩
+    use δ, hδ
+    intro l hl hl'
+    have key := hbound l hl hl'
+    apply le_trans (norm_integral_le_eLpNorm_one_toReal _)
+    convert! ENNReal.toReal_mono _ key using 1
+    · norm_num [eLpNorm_eq_lintegral_rpow_enorm_toReal]
+      congr! 2
+      ext
+      simp [Function.outR1, Function.outR1nested, realLIE, ENorm.enorm, ←NNReal.coe_inj, EuclideanSpace.norm_eq, Real.sqrt_sq_eq_abs]
+    · rw [ENNReal.toReal_mul, ENNReal.toReal_ofReal hε.le]
+    · exact ENNReal.mul_ne_top ENNReal.coe_ne_top (hl.eLpNorm_ne_top)

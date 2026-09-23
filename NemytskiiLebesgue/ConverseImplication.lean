@@ -491,7 +491,7 @@ private lemma exists_memLp_and_not_memLp_nemytskii_of_pairwise_disjoint_measurab
           simp
           rw [tsum_eq_single j]
           · aesop
-          · exact fun i hi => Set.indicator_of_notMem (fun hi' => hi <| False.elim <| (hA hi).le_bot ⟨hi', hx⟩) _
+          · exact fun i hi => Set.indicator_of_notMem (hi <| False.elim <| (hA hi).le_bot ⟨·, hx⟩) _
         · exact A_meas
         · exact hA
       rw [eLpNorm_eq_lintegral_rpow_enorm_toReal]
@@ -768,15 +768,16 @@ private lemma Function.IsCaratheodory.exists_exists_of_volume_growthSup_ne_zero
         MeasurableSet Aₖ ∧
         Aₖ ⊆ P k ∧
         volume Aₖ < ⊤ ∧
-        ∃ uₖ : ℝ → ℝ^m, Measurable uₖ ∧
-        (∀ x : ℝ, x ∉ Aₖ → uₖ x = 0) ∧
-        1 ≤ ∫⁻ x in Aₖ, ‖f x (uₖ x)‖ₑ ^ Q ∂volume ∧
-        ∫⁻ x in Aₖ, ‖f x (uₖ x)‖ₑ ^ Q ∂volume ≤ 2 ∧
-        ∫⁻ x in Aₖ, ‖uₖ x‖ₑ ^ p.toReal ∂volume ≤ 2 * ↱((2^(k+1)) ^ (-Q)) := by
+        ∃ uₖ : ℝ → ℝ^m,
+          Measurable uₖ ∧
+          (∀ x : ℝ, x ∉ Aₖ → uₖ x = 0) ∧
+          1 ≤ ∫⁻ x in Aₖ, ‖f x (uₖ x)‖ₑ ^ Q ∂volume ∧
+          ∫⁻ x in Aₖ, ‖f x (uₖ x)‖ₑ ^ Q ∂volume ≤ 2 ∧
+          ∫⁻ x in Aₖ, ‖uₖ x‖ₑ ^ p.toReal ∂volume ≤ 2 * ↱((2^(k+1)) ^ (-Q)) := by
       intro k
       have int_pos : (2 : ℝ≥0∞) ^ Q < ∫⁻ x in P k, (growthSup f r (2^(k+1)) x) ^ Q ∂volume := by
         have int_pos : ∫⁻ x in P k, (growthSup f r (2^(k+1)) x) ^ Q ∂volume = ∫⁻ x in P k, ⊤ ^ Q ∂volume := by
-          refine' setLIntegral_congr_fun (P_disj k) _
+          apply setLIntegral_congr_fun (P_disj k)
           intro x hx
           specialize P_subset k hx
           aesop

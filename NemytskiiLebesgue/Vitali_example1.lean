@@ -241,8 +241,8 @@ example
     {v : ℝ → ℝ^1} (hv : MemLp v ↱3 μ1) :
     Integrable
       (fun ω : ℝ => ⟪normSMulSelf ω (u ω) - normSMulSelf ω (v ω), u ω - v ω⟫) μ1 ∧
-    ∫ ω, ⟪normSMulSelf ω (u ω) - normSMulSelf ω (v ω), u ω - v ω⟫ ∂μ1 ≥
-      (1 / 2 : ℝ) * ∫ ω, ‖u ω - v ω‖ ^ (3 : ℝ) ∂μ1 :=
+    ∫ ω : ℝ, ⟪normSMulSelf ω (u ω) - normSMulSelf ω (v ω), u ω - v ω⟫ ∂μ1 ≥
+      (1 / 2 : ℝ) * ∫ ω : ℝ, ‖u ω - v ω‖ ^ (3 : ℝ) ∂μ1 :=
   normSMulSelf_isCaratheodory.integral_nemyckii_sub_nemytskii_inner_memLp_sub_memLp_ge_of_ae_all_sub_inner_sub_ge_of_growth_of_holderConjugate_real
     example332
     MemLp.zero
@@ -398,7 +398,7 @@ example
     Integrable
       (fun ω : ℝ => ⟪|u ω| * (u ω) - |v ω| * (v ω), u ω - v ω⟫) μ1 ∧
     ∫ ω : ℝ, ⟪|u ω| * (u ω) - |v ω| * (v ω), u ω - v ω⟫ ∂μ1 ≥
-      (1 / 2 : ℝ) * ∫ ω, |u ω - v ω| ^ (3 : ℝ) ∂μ1 := by
+      (1 / 2 : ℝ) * ∫ ω : ℝ, |u ω - v ω| ^ (3 : ℝ) ∂μ1 := by
   simpa [absMulSelf] using
     absMulSelf_caratheodory.integral_nemyckii_sub_nemytskii_inner_memLp_sub_memLp_ge_of_ae_all_sub_inner_sub_ge_of_growth_of_holderConjugate
       example332
